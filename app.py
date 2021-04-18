@@ -30,6 +30,7 @@ testNum = 0
 
 @app.route("/")
 def index():
+	global testNum
 	# Read GPIO Status
 	ledRedSts = GPIO.input(ledRed)
 
@@ -37,8 +38,6 @@ def index():
       'ledRed'  : ledRedSts,
 	  'testNum' : testNum,
       }
-
-	global testNum
 	return render_template('index.html', **templateData)
 	
 # The function below is executed when someone requests a URL with the actuator name and action in it:
