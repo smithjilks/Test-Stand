@@ -5,6 +5,7 @@
   
 import time
 import threading
+import RPi.GPIO as GPIO
   
 class Ignition(threading.Thread):
   
