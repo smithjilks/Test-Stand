@@ -4,6 +4,7 @@
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
 from modules.ignition import *
+from modules.dataFetcher import *
 import time
 
 app = Flask(__name__)
@@ -22,7 +23,10 @@ GPIO.setup(ledRed, GPIO.OUT)
 
 # turn leds OFF 
 GPIO.output(ledRed, GPIO.LOW)
-	
+
+hx = 4
+data = FetchData(hx)
+
 @app.route("/")
 def index():
 	# Read GPIO Status
@@ -38,11 +42,13 @@ def index():
 def action(deviceName, action):
 	if deviceName == 'ledRed':
 		actuator = ledRed
+	elif deviceName == 'stopData':
+		data.stop()
    
 	if action == "on":
 		t1 = Ignition(actuator)
 		t1.start()
-		time.sleep(3)
+		data.start()
 		t1.stop()
 
 	if action == "off":
