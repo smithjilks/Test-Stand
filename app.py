@@ -1,7 +1,7 @@
 '''
 	Raspberry Pi GPIO Status and Control
 '''
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
 from modules.ignition import *
 import time
