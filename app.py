@@ -28,6 +28,9 @@ hx = 4
 
 testNum = 0
 
+ignitionThreads = []
+dataThreads = []
+
 @app.route("/")
 def index():
 	global testNum
@@ -48,16 +51,17 @@ def action(deviceName, action):
 		actuator = ledRed
    
 	if action == "on":
-		#t1 = Ignition(actuator)
-		#t1.start()
-		#data = FetchData(hx)
-		#data.start()
-		#t1.stop()
+		t1 = Ignition(actuator)
+		ignitionThreads.append(t1)
+		ignitionThreads[testNum].start()
+		data = FetchData(hx)
+		dataThreads.append(data)
+		dataThreads[testNum].start()
+		ignitionThreads[testNum].stop()
 		testNum = testNum + 1
 
 	if deviceName == 'stopData':
-		#data.stop()
-		x=2
+		dataThreads[testNum - 1].stop()
 
 	if action == "off":
 		GPIO.output(actuator, GPIO.LOW)
