@@ -37,6 +37,8 @@ def index():
       'ledRed'  : ledRedSts,
 	  'testNum' : testNum,
       }
+
+	global testNum
 	return render_template('index.html', **templateData)
 	
 # The function below is executed when someone requests a URL with the actuator name and action in it:
@@ -54,7 +56,8 @@ def action(deviceName, action):
 		testNum = testNum + 1
 
 	if deviceName == 'stopData':
-		data.stop()
+		#data.stop()
+		x=2
 
 	if action == "off":
 		GPIO.output(actuator, GPIO.LOW)
