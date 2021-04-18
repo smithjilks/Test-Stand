@@ -25,7 +25,6 @@ GPIO.setup(ledRed, GPIO.OUT)
 GPIO.output(ledRed, GPIO.LOW)
 
 hx = 4
-data = FetchData(hx)
 
 @app.route("/")
 def index():
@@ -48,6 +47,7 @@ def action(deviceName, action):
 	if action == "on":
 		t1 = Ignition(actuator)
 		t1.start()
+		data = FetchData(hx)
 		data.start()
 		t1.stop()
 
