@@ -26,6 +26,8 @@ GPIO.output(ledRed, GPIO.LOW)
 
 hx = 4
 
+testNum = 0
+
 @app.route("/")
 def index():
 	# Read GPIO Status
@@ -33,6 +35,7 @@ def index():
 
 	templateData = {
       'ledRed'  : ledRedSts,
+	  'testNum' : testNum,
       }
 	return render_template('index.html', **templateData)
 	
@@ -43,15 +46,16 @@ def action(deviceName, action):
 		actuator = ledRed
    
 	if action == "on":
-		t1 = Ignition(actuator)
-		t1.start()
-		data = FetchData(hx)
-		data.start()
-		t1.stop()
+		#t1 = Ignition(actuator)
+		#t1.start()
+		#data = FetchData(hx)
+		#data.start()
+		#t1.stop()
+		testNum = testNum + 1
 
 	if deviceName == 'stopData':
 		data.stop()
-		
+
 	if action == "off":
 		GPIO.output(actuator, GPIO.LOW)
 		     
@@ -59,6 +63,7 @@ def action(deviceName, action):
    
 	templateData = {
       'ledRed'  : ledRedSts,
+	  'testNum' : testNum,
 	}
 	return render_template('index.html', **templateData)
 
