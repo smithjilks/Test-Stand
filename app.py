@@ -43,6 +43,7 @@ def index():
 # The function below is executed when someone requests a URL with the actuator name and action in it:
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
+	global testNum
 	if deviceName == 'ledRed':
 		actuator = ledRed
    
