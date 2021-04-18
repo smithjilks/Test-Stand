@@ -32,8 +32,8 @@ class FetchData(threading.Thread):
         allPoints = []
         time.sleep(2)
         while True:
-            #val = self._hx.getWeight()
-            val = random.randint(0,100)
+            val = self._hx.getWeight()
+            #val = random.randint(0,100)
             allPoints.append(val)
             time.sleep(0.0125)
             if self.stopped():
