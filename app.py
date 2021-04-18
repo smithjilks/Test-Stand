@@ -1,8 +1,10 @@
 '''
 	Raspberry Pi GPIO Status and Control
 '''
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
+from modules.ignition import *
+import time
 
 app = Flask(__name__)
 
@@ -10,7 +12,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 #define actuators GPIOs
-ledRed = 5
+ledRed = 19
 
 #initialize GPIO status variables
 ledRedSts = 0
@@ -38,7 +40,11 @@ def action(deviceName, action):
 		actuator = ledRed
    
 	if action == "on":
-		GPIO.output(actuator, GPIO.HIGH)
+		t1 = Ignition(actuator)
+		t1.start()
+		time.sleep(3)
+		t1.stop()
+
 	if action == "off":
 		GPIO.output(actuator, GPIO.LOW)
 		     
