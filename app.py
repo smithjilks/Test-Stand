@@ -41,8 +41,6 @@ def index():
 def action(deviceName, action):
 	if deviceName == 'ledRed':
 		actuator = ledRed
-	elif deviceName == 'stopData':
-		data.stop()
    
 	if action == "on":
 		t1 = Ignition(actuator)
@@ -51,6 +49,9 @@ def action(deviceName, action):
 		data.start()
 		t1.stop()
 
+	if deviceName == 'stopData':
+		data.stop()
+		
 	if action == "off":
 		GPIO.output(actuator, GPIO.LOW)
 		     
