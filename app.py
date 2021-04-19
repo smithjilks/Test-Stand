@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
 from modules.ignition import *
 from modules.dataFetcher import *
+from modules.hx711 import HX711
 import time
 
 app = Flask(__name__)
@@ -15,6 +16,17 @@ GPIO.setwarnings(False)
 #define actuators GPIOs
 ledRed = 19
 
+#hx711 reference unit
+referenceUnit = 1
+
+#setup hx711
+hx = HX711(dout=5, pd_sck=6)
+
+hx.setReferenceUnit(referenceUnit)
+
+hx.reset()
+hx.tare()
+
 #initialize GPIO status variables
 ledRedSts = 0
 
@@ -23,8 +35,6 @@ GPIO.setup(ledRed, GPIO.OUT)
 
 # turn leds OFF 
 GPIO.output(ledRed, GPIO.LOW)
-
-hx = 4
 
 testNum = 0
 
@@ -47,6 +57,7 @@ def index():
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
 	global testNum
+	global hx
 	if deviceName == 'ledRed':
 		actuator = ledRed
    
