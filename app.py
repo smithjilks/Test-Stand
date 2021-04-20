@@ -17,7 +17,7 @@ GPIO.setwarnings(False)
 ledRed = 19
 
 #hx711 reference unit
-referenceUnit = 1
+referenceUnit = 21.4
 
 #setup hx711
 hx = HX711(dout=5, pd_sck=6)
