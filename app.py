@@ -62,6 +62,7 @@ def action(deviceName, action):
 		actuator = ledRed
    
 	if action == "on":
+		hx.tare()
 		t1 = Ignition(actuator)
 		ignitionThreads.append(t1)
 		ignitionThreads[testNum].start()
