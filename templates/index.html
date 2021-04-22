@@ -2,8 +2,11 @@
    <head>
       <title>GPIO Control</title>
 	  <link rel="stylesheet" href='../static/master.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	  <style>
-		  button { 
+		  .button { 
   border-radius: 50%; 
   width: 200px;
   height: 200px;
@@ -35,19 +38,18 @@ button span { position: relative; }
 	  </style>
    </head>
 
-   <body>
-		<h1>Nakuja Launch Ignition</h1>
+   <body style="background-color: black;">
+		<h1 style="color: aliceblue;">Nakuja Test Stand</h1>
 		
-		<h2> Actuator Status </h2>
-		<h3> Ignition ==>  {{ ledRed  }}</h3>
-    <h4> Test Number {{ testNum }}</h4>
+		<h2 style="color: aliceblue;"> Igniter Status </h2>
+		<h3 style="color: aliceblue;"> Ignition ==>  {{ ledRed  }}</h3>
+    <h4 style="color: aliceblue;"> Test Number {{ testNum }}</h4>
 		<br>
-		<h2> Commands </h2>
-		<h3> 
-			Launch ==> 
+		<h2 style="color: aliceblue;"> Commands </h2>
+		<h3 style="color: aliceblue;"> 
+			Fire ==> 
 			<a href="/ledRed/on" class="button"><button id="everybodydance"><span>ON</span></button></a>
-			<a href="/ledRed/off"class="button"><button id="everybodydance"><span>OFF</span></button></a>
-      <a href="/stopData/leds"class="button"><button id="everybodydance"><span>STOP DATA LOGGING</span></button></a>
+      <a href="/stopData/leds"><button class="btn btn-info"><span>STOP DATA LOGGING</span></button></a>
 		</h3>
 		
    </body>
