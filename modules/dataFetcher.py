@@ -9,6 +9,7 @@ import RPi.GPIO as GPIO
 import numpy as np
 import random
 from datetime import datetime
+from drive import uploadToDrive
   
 class FetchData(threading.Thread):
   
@@ -39,6 +40,7 @@ class FetchData(threading.Thread):
             if self.stopped():
                 filename = datetime.now().strftime("%A %d %B %Y %I-%M%p") + ".csv"
                 np.savetxt(filename, allPoints, newline="\n")
+                uploadToDrive(filename)
                 return
   
 
