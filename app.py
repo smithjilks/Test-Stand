@@ -4,7 +4,7 @@
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
 from modules.ignition import *
-from dataFetcher import *
+from modules.dataFetcher import *
 from modules.hx711 import HX711
 import time
 
