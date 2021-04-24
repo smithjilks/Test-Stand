@@ -27,7 +27,7 @@ class Ignition(threading.Thread):
   
     def run(self):
         GPIO.output(self._actuator, GPIO.HIGH)
-        time.sleep(5)
+        time.sleep(20)
         while True:
             if self.stopped():
                 GPIO.output(self._actuator, GPIO.LOW)
