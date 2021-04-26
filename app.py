@@ -5,7 +5,14 @@ import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
 from modules.ignition import *
 from modules.dataFetcher import *
-from modules.hx711 import HX711
+
+EMULATE_HX711=True
+
+if not EMULATE_HX711:
+	from modules.hx711 import HX711
+else:
+	from modules.emulated_hx711 import HX711
+	
 import time
 
 app = Flask(__name__)
