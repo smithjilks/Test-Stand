@@ -6,7 +6,7 @@ from flask import Flask, render_template, request
 from modules.ignition import *
 from modules.dataFetcher import *
 
-EMULATE_HX711=True
+EMULATE_HX711=False
 
 if not EMULATE_HX711:
 	from modules.hx711 import HX711
