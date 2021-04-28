@@ -17,11 +17,10 @@ class FetchData(threading.Thread):
     # The thread itself has to check
     # regularly for the stopped() condition.
   
-    def __init__(self, hx, pixels, *args, **kwargs):
+    def __init__(self, hx, *args, **kwargs):
         super(FetchData, self).__init__(*args, **kwargs)
         self._stop = threading.Event()
         self._hx = hx
-        pixels.fill((0,0,255))
   
     # function using _stop function
     def stop(self):

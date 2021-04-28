@@ -80,7 +80,7 @@ def action(deviceName, action):
 		t1 = Ignition(actuator, pixels)
 		ignitionThreads.append(t1)
 		ignitionThreads[testNum].start()
-		data = FetchData(hx, pixels)
+		data = FetchData(hx)
 		dataThreads.append(data)
 		dataThreads[testNum].start()
 		ignitionThreads[testNum].stop()
