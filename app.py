@@ -76,16 +76,14 @@ def action(deviceName, action):
 		actuator = ledRed
    
 	if action == "on":
-		pixels.fill((255, 0, 0))
 		hx.tare()
-		t1 = Ignition(actuator)
+		t1 = Ignition(actuator, pixels)
 		ignitionThreads.append(t1)
 		ignitionThreads[testNum].start()
-		data = FetchData(hx)
+		data = FetchData(hx, pixels)
 		dataThreads.append(data)
 		dataThreads[testNum].start()
 		ignitionThreads[testNum].stop()
-		pixels.fill((0,0,255))
 		testNum = testNum + 1
 
 	if deviceName == 'stopData':
