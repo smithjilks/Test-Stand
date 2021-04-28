@@ -18,6 +18,7 @@ class Ignition(threading.Thread):
         self._stop = threading.Event()
         self._actuator = actuator
         pixels.fill((255, 0, 0))
+        self._pixels = pixels
   
     # function using _stop function
     def stop(self):
@@ -29,10 +30,10 @@ class Ignition(threading.Thread):
     def run(self):
         GPIO.output(self._actuator, GPIO.HIGH)
         time.sleep(5)
-        pixels.fill((0,0,255))
         while True:
             if self.stopped():
                 GPIO.output(self._actuator, GPIO.LOW)
+                self._pixels.fill((0,0,255))
                 return
   
 
