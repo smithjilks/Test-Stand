@@ -59,7 +59,7 @@ def index():
 	# Read GPIO Status
 	ledRedSts = GPIO.input(ledRed)
 
-	pixels.fill((139,0,139))
+	pixels.fill((75,0,130))
 
 	templateData = {
       'ledRed'  : ledRedSts,
@@ -90,7 +90,7 @@ def action(deviceName, action):
 
 	if deviceName == 'stopData':
 		dataThreads[testNum - 1].stop()
-		pixels.fill((139,0,139))
+		pixels.fill((75,0,130))
 
 	if action == "off":
 		GPIO.output(actuator, GPIO.LOW)
