@@ -5,8 +5,10 @@ import RPi.GPIO as GPIO
 from flask import Flask, render_template, request
 from modules.ignition import *
 from modules.dataFetcher import *
+import board
+import neopixel
 
-EMULATE_HX711=False
+EMULATE_HX711=True
 
 if not EMULATE_HX711:
 	from modules.hx711 import HX711
@@ -20,8 +22,11 @@ app = Flask(__name__)
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-#define actuators GPIOs
+#define actuators GPIOs Relay
 ledRed = 19
+
+#define neopixels
+pixels = neopixel.NeoPixel(board.D18, 8)
 
 #hx711 reference unit
 referenceUnit = 21.4
@@ -54,6 +59,8 @@ def index():
 	# Read GPIO Status
 	ledRedSts = GPIO.input(ledRed)
 
+	pixels.fill((139,0,139))
+
 	templateData = {
       'ledRed'  : ledRedSts,
 	  'testNum' : testNum,
@@ -69,6 +76,7 @@ def action(deviceName, action):
 		actuator = ledRed
    
 	if action == "on":
+		pixels.fill((255, 0, 0))
 		hx.tare()
 		t1 = Ignition(actuator)
 		ignitionThreads.append(t1)
@@ -77,10 +85,12 @@ def action(deviceName, action):
 		dataThreads.append(data)
 		dataThreads[testNum].start()
 		ignitionThreads[testNum].stop()
+		pixels.fill((0,0,255))
 		testNum = testNum + 1
 
 	if deviceName == 'stopData':
 		dataThreads[testNum - 1].stop()
+		pixels.fill((139,0,139))
 
 	if action == "off":
 		GPIO.output(actuator, GPIO.LOW)
