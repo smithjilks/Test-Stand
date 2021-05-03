@@ -8,7 +8,7 @@ from modules.dataFetcher import *
 import board
 import neopixel
 
-EMULATE_HX711=True
+EMULATE_HX711=False
 
 if not EMULATE_HX711:
 	from modules.hx711 import HX711
