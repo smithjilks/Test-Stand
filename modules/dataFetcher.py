@@ -17,10 +17,10 @@ class FetchData(threading.Thread):
     # The thread itself has to check
     # regularly for the stopped() condition.
   
-    def __init__(self, hx, *args, **kwargs):
+    def __init__(self, ser, *args, **kwargs):
         super(FetchData, self).__init__(*args, **kwargs)
         self._stop = threading.Event()
-        self._hx = hx
+        self._ser = ser
   
     # function using _stop function
     def stop(self):
@@ -33,7 +33,7 @@ class FetchData(threading.Thread):
         allPoints = []
         time.sleep(2)
         while True:
-            val = self._hx.getWeight()
+            val = self._ser.readline().decode('utf-8').rstrip()
             #val = random.randint(0,100)
             allPoints.append(val)
             time.sleep(0.0125)

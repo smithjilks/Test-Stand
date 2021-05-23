@@ -7,14 +7,8 @@ from modules.ignition import *
 from modules.dataFetcher import *
 import board
 import neopixel
+import serial
 
-EMULATE_HX711=False
-
-if not EMULATE_HX711:
-	from modules.hx711 import HX711
-else:
-	from modules.emulated_hx711 import HX711
-	
 import time
 
 app = Flask(__name__)
@@ -28,16 +22,9 @@ ledRed = 19
 #define neopixels
 pixels = neopixel.NeoPixel(board.D18, 8)
 
-#hx711 reference unit
-referenceUnit = 21.4
-
-#setup hx711
-hx = HX711(dout=5, pd_sck=6)
-
-hx.setReferenceUnit(referenceUnit)
-
-hx.reset()
-hx.tare()
+#set up serial
+ser = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
+ser.flush()
 
 #initialize GPIO status variables
 ledRedSts = 0
@@ -71,16 +58,15 @@ def index():
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
 	global testNum
-	global hx
 	if deviceName == 'ledRed':
 		actuator = ledRed
    
 	if action == "on":
-		hx.tare()
+		ser.flush()
 		t1 = Ignition(actuator, pixels)
 		ignitionThreads.append(t1)
 		ignitionThreads[testNum].start()
-		data = FetchData(hx)
+		data = FetchData(ser)
 		dataThreads.append(data)
 		dataThreads[testNum].start()
 		ignitionThreads[testNum].stop()
