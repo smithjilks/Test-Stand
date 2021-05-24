@@ -29,7 +29,7 @@ ledRed = 19
 pixels = neopixel.NeoPixel(board.D18, 8)
 
 #hx711 reference unit
-referenceUnit = 22.13
+referenceUnit = 21.4
 
 #setup hx711
 hx = HX711(dout=5, pd_sck=6)
